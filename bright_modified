@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html lang="en">
+   <head >
+     <meta charset="utf-8">
+     <meta name="view-port" content="width=device-width, initial-scale=1">
+       
+       <title> sale for donut</title>
+       <script>
+           function updateOrder(){
+                //declare constants
+                const TAXRATE = 0.0925;
+                const DONUTPRICE =0.5;
+                //parse value to avoid number/string from displaying NaN error
+                var numCakeDonut= document.getElementById("cakeDonut").value;
+                var numGlazeDonut= document.getElementById("glazedDonut").value;
+               parseInt(numCakeDonut);
+               parseInt(numGlazeDonut);
+                    if(isNaN(numCakeDonut))
+                         numCakeDonut = 0;
+                    if(isNaN(numGlazeDonut))
+                         numGlazeDonut=0;     
+                //calculations to be processed
+                var subTotal= (numCakeDonut + numGlazeDonut) * DONUTPRICE;
+                var tax= subTotal * TAXRATE;
+                var total=subTotal + tax;
+              //automatic display 
+            document.getElementById("subTotal").value = "N"+ subTotal.toFixed(2);
+            document.getElementById("tax").value ="N"+   tax.toFixed(2) ;
+            document.getElementById("total").value ="N";+ total.toFixed(2);
+             //validate some form fields
+             var pickUpMin;
+             if(document.getElementById("name").value=="")
+                 alert("Name field is empty!! please, Enter your name");  
+                 else if(document.getElementById("pickUpMin").value== ""  || isNaN(document.getElementById("pickUpMin").value)) 
+                     alert("pick up minuit field is empty or it is not a number. Please, Enter a time of pick-up");
+                  else
+               //to submit your order to server
+               form.submit();
+                 
+           }
+           
+           
+       </script>
+   </head>   
+        
+   <body>
+       <div id="logo" style="color:gold">
+         <img   src="donut_logo.jpg" style="width :500px; height:350px; " alt="logo"/>
+                <div  id="write_logo" style="float:right; margin:right; color:white; background-color:navy">
+                  <h1> Duncan's just-in-time-Donuts</h1>
+                  <p><i>"...Nothing taste like it"</i></p>
+               </div> 
+       </div>
+       <div id="frame">
+         <form name="form-order" action="donut.php" method="POST">
+             <p>All Donuts 50 cents each, Cake or Glazed!</p>
+           <input  type="text"  placeholder="Name" size="90.5">
+           <div class="field">
+            <input  type="text"  value="" id="cakeDonut" name="cakeDonut" onchange="updateOrder()"  
+                          placeholder="# Cake Donuts" size="90.5">
+           </div> 
+           <div class="field">
+             <input  type="text" value=""  id="glazedDonut" name="glazedDonut" onchange="updateOrder()"  
+                          placeholder="# of Glazed Donuts" size="90.5">
+           </div> 
+               <input  type="text" placeholder="Minuits till pick-up" size="90.5">
+                <input  type="text" placeholder="Sub-total" size="90.5" id="subTotal">
+                 <input  type="text" placeholder="Tax" size="90.5" id="tax">
+                   <input  type="text" placeholder="Total" size="90.5" id="total">
+                 <input type="button" value="place order" onclick=" placeOrder(this.form)">
+         </form>  
+                 
+       </div>    
+   </body>
+</html>      
